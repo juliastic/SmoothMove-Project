@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Messungen</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="./js/measurementsHandler.js"></script>
+    <script>
+        listenToMeasurements();
+    </script>
+
+</head>
+
+<body>
+
+    <section>
+        <nav>
+            <ul class="menuItems">
+                <li><a href="index.html" data-item="Home">Home</a></li>
+                <li><a class="active" href="measurements.html" data-item="Messungen">Messungen</a></li>
+                <li><a href="sensordata.html" data-item="Sensordaten">Sensordaten</a></li>
+                <li><a href="locations.html" data-item="Standorte">Standorte</a></li>
+                <li><a href="contact.html" data-item="Kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <h1>Messungen</h1>
+    <p>Letztes Update AM <empty id="last-update-label">(KEINE VERBINDUNG)</empty>
+    </p>
+    <p id="measurements-info">
+        KEINE VERBINDUNG, BITTE <a href="contact.html" data-item="Messungen">KONTAKTIEREN SIE DIE ENTWICKLER:INNEN</a>!
+    </p>
+    <div class="sensor-data">
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>CO2:</b>
+                <empty id="co2">k.A.</empty> <b id="co2-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-co2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-co2" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-co2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>METHAN:</b>
+                <empty id="methane">k.A.</empty> <b id="methane-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-methane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-methane" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-methane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>RAUCH:</b>
+                <empty id="smoke">k.A.</empty> <b id="smoke-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-smoke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-smoke" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-smoke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>TOLUENE:</b>
+                <empty id="toluene">k.A.</empty> <b id="toluene-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-toluene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-toluene" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-toluene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>NH4:</b>
+                <empty id="nh4">k.A.</empty> <b id="nh4-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-nh4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-nh4" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-nh4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>ACETONE:</b>
+                <empty id="acetone">k.A.</empty> <b id="acetone-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-acetone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                    class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-acetone" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-acetone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>CO:</b>
+                <empty id="co">k.A.</empty> <b id="co-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-co" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-co" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-co" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>H2:</b>
+                <empty id="h2">k.A.</empty> <b id="h2-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-h2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-h2" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-h2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+        <div class="centering-div-measurements">
+            <span class="scaling-text-measurements"><b>BRENNBARE GASE:</b>
+                <empty id="fg">k.A.</empty> <b id="fg-limit"></b>
+            </span>
+            <span>
+                <svg id="questionmark-fg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="questionmark">
+                    <g>
+                        <path fill="none" d="M0 0H24V24H0z" />
+                        <path
+                            d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+                    </g>
+                </svg>
+                <svg id="checkmark-fg" class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"
+                    style="display: none;">
+                    <path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+                <svg class="cross" id="cross-fg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"
+                    style="display: none;">
+                    <line x2="50" y2="50" />
+                    <line x1="50" y2="50" />
+                </svg>
+            </span>
+        </div>
+    </div>
+
+    <footer>
+        <p>Take your future into your own hands!<br>
+            &copy Smooth Move</p>
+    </footer>
+</body>
+
+</html>

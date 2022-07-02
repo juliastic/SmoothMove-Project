@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Sensordaten</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js'></script>
+
+</head>
+
+<body>
+
+    <section>
+        <nav>
+            <ul class="menuItems">
+                <li><a href='index.html' data-item='Home'>Home</a></li>
+                <li><a href='measurements.html' data-item='Messungen'>Messungen</a></li>
+                <li><a class="active" href='sensordata.html' data-item='Sensordaten'>Sensordaten</a></li>
+                <li><a href='locations.html' data-item='Standorte'>Standorte</a></li>
+                <li><a href='contact.html' data-item='Kontakt'>Kontakt</a></li>
+            </ul>
+        </nav>
+
+    </section>
+
+    <h1>Sensordaten</h1>
+    <div class="sensor-data">
+        <span class="scaling-text"><b>Was bedeutet PPM?</b></span>
+        <div class="centering-div">
+            <img id="air-quality-img" class="sensor-image" src="./img/TabelleLuftqualitaet.png" alt="Air quality table">
+            Bei der Messung von Gasen wie Kohlendioxid, Sauerstoff oder Methan wird der Begriff Konzentration verwendet, um die Volumenmenge eines Gases in der Luft zu beschreiben. Die 2 gebr&auml;uchlichsten Ma&szlig;einheiten sind Teile pro Million und prozentuale Konzentration.
+            <br>
+            <br>
+            Teile pro Million (abgek&uuml;rzt ppm) ist das Verh&auml;ltnis von einem Gas zu einem anderen. Zum Beispiel bedeutet 1.000 ppm CO, dass, wenn Sie eine Million Gasmolek&uuml;le z&auml;hlen k&ouml;nnten, 1.000 davon Kohlenmonoxid und 999.000 Molek&uuml;le andere Gase w&auml;ren. 
+            Luftqualit&auml;t hat einen enormen Einfluss auf die menschliche Lebensqualit&auml;t, so war alleine in Indien die Luftverschmutzung 2017 f&uuml;r 1,2 Mio. Todesf&auml;lle verantwortlich.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>CO2</b></span>
+        <div class="centering-div">
+            <img class="sensor-image" src="./img/CO2.jpg" alt="CO2 Table"> 
+            Au&szlig;enluft hat &uuml;blicherweise eine CO2-Konzentration von etwa 400 ppm. Ein menschlicher Atemzug enth&auml;lt etwa 30.000 ppm. Kohlendioxidkonzentrationen von mehr als 20.000 ppm k&ouml;nnen zu Husten f&uuml;hren. Konzentrationen von &uuml;ber 100.000 ppm rufen Bewusstlosigkeit und Zittern hervor.
+            <br>
+            <br>
+            Werte von mehr als 250.000 ppm werden zur t&ouml;dlichen Gefahr, da sich die hohen Konzentrationen im K&ouml;rper entweder wie Gift verhalten oder den Sauerstoff aus der Blutbahn verdr&auml;ngen. Zu viel Kohlenstoffdioxid kann t&ouml;dlich sein, die Produktivit&auml;t verringern und auch die Konzentrationsf&auml;higkeit senken.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>METHAN</b></span>
+        <div class="centering-div">
+            <img class="sensor-image" src="./img/Methan.jpg" alt="Methan table">Methan geh&ouml;rt zu den Treibhausgasen, die in der Atmosph&auml;re Strahlung aufnehmen und die Luft erw&auml;rmen.
+            Methan ist nach Kohlendioxid das zweitwichtigste vom Menschen verursachte Treibhausgas. Betrachtet man dieselbe Masse von Methan und Kohlendioxid (z.B. 1 kg), hat es sogar eine 28 Mal so starke Treibhauswirkung wie Kohlendioxid. Durch die Freisetzung aufgrund von menschlichen Aktivit&auml;ten stieg die Konzentration des Spurengases in der Atmosph&auml;re betr&auml;chtlich. 
+            <br>
+            <br>
+            W&auml;hrend der letzten 650.000 Jahre lag der Wert zwischen 400 Teilchen pro Milliarde Luftteilchen (englisch: parts per billion, kurz ppb) in den Kaltzeiten und 700 ppb in den warmen Zwischeneiszeiten. 
+            In der vorindustriellen Zeit &#8208; also vor 1750 &#8208; waren es 722 ppb. Im Jahr 2021 hat sich die Konzentration auf 1866 ppb mehr als verdoppelt und steigt pro Jahr um ein bis zwei Prozent weiter.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>RAUCH</b></span>
+        <div class="centering-div">
+            Der durchschnittliche CO-Wert eines Nichtrauchers liegt bei 2ppm. Werte bis 5 ppm sind bei
+            Nichtrauchern &uuml;blich. Werte zwischen 6 und 10 sind seltener, lassen auf eine Belastung durch Kohlenmonoxid
+            in der Umwelt schlie&szlig;en. Werte &uuml;ber 10 ppm sind bei Nichtrauchern bedenklich.  Der durchschnittliche Wert von Rauchern liegt bei 33 ppm CO. Starke Raucher erreichen Werte
+            &uuml;ber 50 ppm CO, Jedoch auch erst im Tagesverlauf mit zunehmender Zahl gerauchter Zigaretten.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>TOLUENE</b></span>
+        <div class="centering-div">
+            Menschen k&ouml;nnen sowohl drinnen als auch drau&szlig;en Toluol ausgesetzt werden, indem sie Autoabgase einatmen, Benzin pumpen, Verzehr von kontaminierten Lebensmitteln oder Wasser oder Verwendung anderer Produkte, die Toluol enthalten, wie Kerosin, Heiz&ouml;l, Farben und Lacke. In der Arbeitsumgebung k&ouml;nnen Menschen Toluol durch Einatmen kontaminierter Luft oder durch Hautkontakt ausgesetzt werden. 
+            <br>
+            <br>
+            Die Exposition gegen&uuml;ber niedrigen bis m&auml;&szlig;igen Konzentrationen kann M&uuml;digkeit, Verwirrtheit, Schw&auml;che, Ged&auml;chtnisverlust, &uuml;belkeit, Appetitlosigkeit und H&ouml;r- und Farbsehverlust verursachen. Die Exposition gegen&uuml;ber hohen Konzentrationen kann zu Bewusstlosigkeit und sogar zum Tod f&uuml;hren. Je mehr Schadstoffe sich in der Luft befinden, desto schlechter ist das f&uuml;r unsere Gesundheit: Die Atemwege k&ouml;nnen erkranken, Kreislauf und Gehirn werden gesch&auml;digt. Nicht nur Mensch und Tier leiden unter der verschmutzten Luft, auch Pflanzen nehmen Schaden.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>NH4</b></span>
+        <div class="centering-div">
+            Ammonium (NH4)-Aerosole werden als Feinstaub bezeichnet und haben nur eine Gr&ouml;&szlig;e von 2,5 Mikron. Die geringe Gr&ouml;&szlig;e von PM2,5-Partikeln erm&ouml;glicht es ihnen, durch Einatmen in die Lunge und den Blutkreislauf einzudringen. Ammoniumpartikel k&ouml;nnen dann Komplikationen wie Asthma , Lungenkrebs , Herz-Kreislauf-Probleme, Geburtsfehler und vorzeitigen Tod beim Menschen verursachen.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>ACETONE</b></span>
+        <div class="centering-div">
+            Aceton ist eine hergestellte Chemikalie, die auch nat&uuml;rlich in der Umwelt vorkommt. Es ist eine farblose Fl&uuml;ssigkeit, die leicht verdunstet, sich in Wasser aufl&ouml;st und brennbar ist. Menschen k&ouml;nnen Aceton ausgesetzt werden, indem sie es einatmen, einnehmen oder &uuml;ber die Haut aufnehmen. Es ist in Fahrzeugabgasen, Tabakrauch und vielen Deponien vorhanden. Im Haushalt k&ouml;nnen Menschen Aceton ausgesetzt werden, indem sie Nagellackentferner, Haushaltsreiniger, Farben, Klebstoffe, Gummizement, Spanplatten oder andere Produkte verwenden, die Aceton enthalten. 
+            <br>
+            <br>
+            Das Trinken von Wasser oder das Essen von acetonhaltigen Lebensmitteln ist ein weiterer Expositionsweg. Das kurzzeitige Einatmen m&auml;&szlig;iger bis hoher Konzentrationen kann zu Reizungen von Nase, Rachen, Lunge und Augen f&uuml;hren. Es kann auch Vergiftungen, Kopfschmerzen, M&uuml;digkeit, Benommenheit, Benommenheit, Schwindel, Verwirrung, erh&ouml;hte Pulsfrequenz, &Uuml;belkeit, Erbrechen und andere Zust&auml;nde verursachen.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>CO</b></span>
+        <div class="centering-div">
+            <img class="sensor-image" src="./img/CO.jpg" alt="CO Table"> Kohlenstoffmonoxid (CO) bezeichnet eine einfache anorganische Verbindung zwischen Kohlenstoff und Sauerstoff. Es handelt sich um ein farb-, geruch- und geschmackloses Gas. Mit Sauerstoff verbrennt es in blauer, durchsichtiger Flamme zu Kohlenstoffdioxid. Das Gas ist ein gef&auml;hrliches Atemgift. Gelangt es z.B. durch das Rauchen von Tabak in den Blutkreislauf, bindet sich Kohlenmonoxid ca. 210-mal st&auml;rker als Sauerstoff an das im Blut befindliche H&auml;moglobin. 
+            <br>
+            <br>
+            Dadurch kann der Sauerstofftransport nachhaltig gest&ouml;rt werden und eine fatale Kohlenmonoxidvergiftung hervorgerufen werden. Schon eine S&auml;ttigung von 1,28 % Kohlenstoffmonoxid in der Raumluft f&uuml;hrt innerhalb von ein bis zwei Minuten zum Tod. Die normale Konzentration des CO in der Luft betr&auml;gt ca. 0,6 bis 6 mg/m³.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>H2</b></span>
+        <div class="centering-div">
+            Wasserstoff ist auf der Erde das am h&auml;ufigsten vorkommende Element - immer gebunden etwa in Wasser oder mit Kohlenstoff. Mit Sauerstoff verbrennt das Gas nahezu r&uuml;ckstandsfrei, ohne Asche oder klimasch&auml;dliche Abgase zu Wasserdampf. Wasserstoff kann sehr flexibel, insbesondere aus erneuerbaren Energiequellen erzeugt und vielf&auml;ltig genutzt werden, zum Beispiel als Treibstoff f&uuml;r Fahrzeuge, als Brennstoff f&uuml;r Heizungen oder als Rohstofflieferant f&uuml;r industrielle Prozesse.
+        </div>
+        <br>
+        <br>
+        <span class="scaling-text"><b>BRENNBARE GASE</b></span>
+        <div class="centering-div">
+            Gassensoren sind Sensoren zur Detektion gasf&ouml;rmiger Substanzen. Sie z&auml;hlen dadurch zu den Chemosensoren. Chemische Informationen in der Umgebungsluft werden von Gassensoren in elektrische Signale umgewandelt. Gassensoren bzw. chemische Sensoren stehen in direkter Wechselwirkung mit der Umgebung. In Bezug auf die Luftqualit&auml;t sind diese Daten wichtig, da dadurch die Methan- und Kohlenstoffmonoxid-Detektion sowie eine personengebundene Kohlenstoffmonoxid- und Schwefelwasserstoff-&uuml;berwachung durchgef&uuml;hrt werden kann.
+        </div>
+    </div>
+
+
+    </div>
+    <footer>
+        <p>Take your future into your own hands!<br>
+        &copy Smooth Move</p>
+    </footer>
+</body>
+
+</html>

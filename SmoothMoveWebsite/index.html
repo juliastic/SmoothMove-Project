@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="./css/styles.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+
+	<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/CustomEase.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+	<script src="js/measurementsHandler.js"></script>
+	<script src="js/mainTree.js"></script>
+	<script>
+		listenToMainData();
+	</script>
+</head>
+
+<body>
+	<section>
+		<nav>
+			<ul class="menuItems">
+				<li><a class="active" href="index.html" data-item="Home">Home</a></li>
+				<li><a href="measurements.html" data-item="Messungen">Messungen</a></li>
+				<li><a href="sensordata.html" data-item="Sensordaten">Sensordaten</a></li>
+				<li><a href="locations.html" data-item="Standorte">Standorte</a></li>
+				<li><a href="contact.html" data-item="Kontakt">Kontakt</a></li>
+			</ul>
+		</nav>
+
+	</section>
+
+	<h1>Luftqualit&auml;t in der Seestadt</h1>
+	<div>
+		<p id="air-quality" style="font-size: 3vmax;">KEINE ANGABE</p>
+		<p id="more-information">KEINE VERBINDUNG, BITTE <a href="contact.html">KONTAKTIEREN SIE DIE
+				ENTWICKLER:INNEN</a>!</p>
+	</div>
+	<svg id="questionmark-big" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+		<g>
+			<path fill="none" d="M0 0H24V24H0z" />
+			<path
+				d="M12 19c.828 0 1.5.672 1.5 1.5S12.828 22 12 22s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5zm0-17c3.314 0 6 2.686 6 6 0 2.165-.753 3.29-2.674 4.923C13.399 14.56 13 15.297 13 17h-2c0-2.474.787-3.695 3.031-5.601C15.548 10.11 16 9.434 16 8c0-2.21-1.79-4-4-4S8 5.79 8 8v1H6V8c0-3.314 2.686-6 6-6z" />
+		</g>
+	</svg>
+
+	<div id="tree" class="canvas" style="display:none;">
+
+		<div id="grass"></div>
+
+		<div class="bees">
+			<div class="bees__1"></div>
+			<div class="bees__2"></div>
+			<div class="bees__3"></div>
+		</div>
+
+		<div class="flowers">
+			<div class="flowers__pink">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+				<div class="flowers__dot1"></div>
+				<div class="flowers__dot2"></div>
+			</div>
+			<div class="flowers__blue">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+			</div>
+			<div class="flowers__orange">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+			</div>
+			<div class="flowers__yellow">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+				<div class="flowers__dot1"></div>
+				<div class="flowers__dot2"></div>
+				<div class="flowers__dot3"></div>
+			</div>
+			<div class="flowers__yellow2">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+			</div>
+			<div class="flowers__purple">
+				<div class="flowers__stem"></div>
+				<div class="flowers__petals"></div>
+				<div class="flowers__dot1"></div>
+				<div class="flowers__dot2"></div>
+			</div>
+		</div>
+
+		<div class="tree">
+			<div class="tree__top"></div>
+			<div class="tree__face">
+				<div class="tree__leye"></div>
+				<div class="tree__reye"></div>
+				<div id="tree-mouth" class="tree__mouth"></div>
+			</div>
+
+			<div class="tree__shade1"></div>
+			<div class="tree__shade2"></div>
+			<div class="tree__shade3"></div>
+			<div class="tree__shade4"></div>
+			<div class="tree__shade5"></div>
+
+			<div class="tree__trunk1"></div>
+			<div class="tree__trunk2"></div>
+			<div class="tree__trunk3">
+				<div class="tree__trunk3__leaf1"></div>
+				<div class="tree__trunk3__leaf2"></div>
+				<div class="tree__trunk3__leaf3"></div>
+			</div>
+		</div>
+
+		<div class="bird">
+			<div class="bird__head"></div>
+			<div class="bird__body"></div>
+			<div class="bird__tail"></div>
+			<div class="bird__note1"></div>
+			<div class="bird__note2"></div>
+			<div class="bird__note3"></div>
+		</div>
+
+	</div>
+	<footer>
+		<p>Take your future into your own hands!<br>
+			&copy Smooth Move</p>
+	</footer>
+</body>
+
+</html>
