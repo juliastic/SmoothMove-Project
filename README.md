@@ -8,6 +8,7 @@ Main communication workflow: *Arduino*->*node.js server*->*Website*
 * [*python3* installation](https://www.python.org/downloads/)
 * Arduino Nano with relevant sensors (MQ-Sensor-Series) - provided
 * [Installation of *Arduino IDE*](https://www.arduino.cc/en/software)
+* `git clone https://github.com/juliastic/SmoothMove-Project.git`
 ## Setup Arduino
 * Connect Arduino Nano to computer with relevant sensors
 * Within *Arduino IDE*:
