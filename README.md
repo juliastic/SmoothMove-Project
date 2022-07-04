@@ -29,7 +29,7 @@ Main communication workflow: *Arduino*->*node.js server*->*Website*
 * *Website* 
     * Execute:
         * `node run server/app.js`
-        * `python3 server/server/py`
+        * `python3 server/server.py`
     * Visit IP_ADDRESS:8000
 ## Testing Project with Dummy Data
 ***This does not require the Arduino setup!***
@@ -39,4 +39,4 @@ To test the website with dummy data:
 * ***Optional***: Variable `lastData` can be modified
 * Execute:
     * `node run server/app.js`
-    * `python3 server/server/py`
+    * `python3 server/server.py`
