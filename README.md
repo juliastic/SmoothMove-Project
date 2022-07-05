@@ -3,6 +3,8 @@ This README.md serves as an additional technical documentation of the project im
 
 Main communication workflow: *Arduino*->*node.js server*->*Website*
 
+The data is received and parsed in JSON format:
+`{"CO2":10,"CH4":100.2,"SMOKE":10,"TOLUENE":10,"NH4":10,"ACETONE":10,"CO":10,"H2":10,"FG":10}`
 ## Prerequisites
 * [*npm* installation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 * [*python3* installation](https://www.python.org/downloads/)
