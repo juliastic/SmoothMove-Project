@@ -30,7 +30,7 @@ The data is received and parsed in JSON format:
     * Run code within IDE
 * *Website* 
     * Execute:
-        * `node run server/app.js`
+        * `node server/app.js`
         * `python3 server/server.py`
     * Visit IP_ADDRESS:8000
 ## Testing Project with Dummy Data
@@ -40,5 +40,5 @@ To test the website with dummy data:
 * All the relevant parsing code should be commented in `server/app.js`
 * ***Optional***: Variable `lastData` can be modified
 * Execute:
-    * `node run server/app.js`
+    * `node server/app.js`
     * `python3 server/server.py`
